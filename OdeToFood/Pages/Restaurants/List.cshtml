@@ -1,0 +1,56 @@
+﻿@page
+@using OdeToFood.Core
+@model ListModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>List</title>
+</head>
+<body>
+  <header>
+    <h1>Restaurant</h1>
+  </header>
+  <section>
+    <div>
+      <form method="get">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="search" class="form-control" name="searchBox" placeholder="Search query">
+            <span class="input-group-btn">
+              <button class="btn btn-default">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <section>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Cuisine</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (Restaurant restaurant in Model.Restaurants)
+          {
+            <tr>
+              <td>@restaurant.Name</td>
+              <td>@restaurant.Location</td>
+              <td>@restaurant.Cuisine.ToString()</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+</html>
