@@ -4,6 +4,10 @@
 
 <header>
   <h2>Restaurant</h2>
+  @if (Model.Message != null)
+  {
+    <div class="alert alert-info">@Model.Message</div>
+  }
 </header>
 <section>
   <div>
@@ -31,7 +35,11 @@
     </span>
   </div>
   <div>
-    <table class="table">
+    @foreach (Restaurant restaurant in Model.Restaurants)
+    {
+      <partial name="_Summary" model="restaurant" />
+    }
+    @*<table class="table">
       <thead>
         <tr>
           <th>Name</th>
@@ -57,7 +65,7 @@
                     <i class="glyphicon glyphicon-edit"></i>
                     Edit
                   </a>
-                  <a asp-page="./Edit" asp-route-id="@restaurant.Id" class="btn btn-danger">
+                  <a asp-page="./Delete" asp-route-id="@restaurant.Id" class="btn btn-danger">
                     <i class="glyphicon glyphicon-trash"></i>
                     Delete
                   </a>
@@ -67,6 +75,6 @@
           </tr>
         }
       </tbody>
-    </table>
+    </table>*@
   </div>
 </section>

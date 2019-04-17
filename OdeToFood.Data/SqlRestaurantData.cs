@@ -25,15 +25,15 @@ namespace OdeToFood.Data
       return newRestaurant;
     }
 
-    public bool DeleteRestaurant(int id)
+    public Restaurant DeleteRestaurant(int id)
     {
       Restaurant restaurant = GetRestaurantById(id);
 
       if (restaurant == null)
-        return false;
+        return null;
 
       db.Restaurants.Remove(restaurant);
-      return true;
+      return restaurant;
     }
 
     public Restaurant GetRestaurantById(int id)
@@ -44,8 +44,7 @@ namespace OdeToFood.Data
     public IEnumerable<Restaurant> GetRestaurantsByName(string name)
     {
       return from res in db.Restaurants
-             where 
-             string.IsNullOrEmpty(name) || 
+             where string.IsNullOrEmpty(name) || 
              res.Name.Contains(name, StringComparison.OrdinalIgnoreCase)
              orderby res.Name
              select res;
@@ -56,19 +55,12 @@ namespace OdeToFood.Data
       EntityEntry entity = db.Restaurants.Attach(updatedRestaurant);
       entity.State = EntityState.Modified;
 
-      //Restaurant restaurant = (from res in db.Restaurants
-      //                         where res.Id == updatedRestaurant.Id
-      //                         select res)
-      //                         .SingleOrDefault();
-
-      //if (restaurant == null)
-      //  return null;
-
-      //restaurant.Name = updatedRestaurant.Name;
-      //restaurant.Location = updatedRestaurant.Location;
-      //restaurant.Cuisine = updatedRestaurant.Cuisine;
-
       return updatedRestaurant;
+    }
+
+    public int GetRestaurantCount()
+    {
+      return db.Restaurants.Count();
     }
 
     public SqlRestaurantData(OdeToFoodDbContext db)

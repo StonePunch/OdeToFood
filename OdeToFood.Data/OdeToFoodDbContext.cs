@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OdeToFood.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OdeToFood.Core
+namespace OdeToFood.Data
 {
   public class OdeToFoodDbContext : DbContext
   {

@@ -1,0 +1,38 @@
+﻿@* /Restaurants/Delete/{id} *@
+@page "{id}"
+@model OdeToFood.Pages.Restaurants.DeleteModel
+@{
+  ViewData["Title"] = "Delete";
+}
+
+<header>
+  <h2>Deleting @Model.Restaurant.Name</h2>
+  <h4>Are you sure you want to delete @Model.Restaurant.Name?</h4>
+</header>
+<section>
+  <form method="post">
+    <div>
+      <div>
+        Id: @Model.Restaurant.Id
+      </div>
+      <div>
+        Location: @Model.Restaurant.Location
+      </div>
+      <div>
+        Cuisine: @Model.Restaurant.Cuisine
+      </div>
+    </div>
+    <div>
+      <span class="btn-group">
+        <a asp-page="./List" class="btn btn-default">
+          <i class="glyphicon glyphicon-arrow-left"></i>
+          Back
+        </a>
+        <button type="submit" class="btn btn-danger">
+          <i class="glyphicon glyphicon-trash"></i>
+          Delete
+        </button>
+      </span>
+    </div>
+  </form>
+</section>

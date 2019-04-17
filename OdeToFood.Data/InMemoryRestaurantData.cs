@@ -55,15 +55,20 @@ namespace OdeToFood.Data
       return newRestaurant;
     }
 
-    public bool DeleteRestaurant(int id)
+    public Restaurant DeleteRestaurant(int id)
     {
       Restaurant restaurant = restaurants.FirstOrDefault(res => res.Id == id);
 
       if (restaurant == null)
-        return false;
+        return null;
 
       restaurants.Remove(restaurant);
-      return true;
+      return restaurant;
+    }
+
+    public int GetRestaurantCount()
+    {
+      return restaurants.Count;
     }
 
     public InMemoryRestaurantData()
