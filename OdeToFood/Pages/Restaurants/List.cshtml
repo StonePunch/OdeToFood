@@ -2,55 +2,71 @@
 @using OdeToFood.Core
 @model ListModel
 
-<!DOCTYPE html>
-
-<html>
-<head>
-  <meta name="viewport" content="width=device-width" />
-  <title>List</title>
-</head>
-<body>
-  <header>
-    <h1>Restaurant</h1>
-  </header>
-  <section>
-    <div>
-      <form method="get">
-        <div class="form-group">
-          <div class="input-group">
-            <input type="search" class="form-control" name="searchBox" placeholder="Search query">
-            <span class="input-group-btn">
-              <button class="btn btn-default">
-                <i class="glyphicon glyphicon-search"></i>
-              </button>
-            </span>
-          </div>
+<header>
+  <h2>Restaurant</h2>
+</header>
+<section>
+  <div>
+    <form method="get">
+      <div class="form-group">
+        <div class="input-group">
+          <input type="search" class="form-control" placeholder="Search query" asp-for="SearchTerm">
+          <span class="input-group-btn">
+            <button class="btn btn-default">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </span>
         </div>
-      </form>
-    </div>
-  </section>
-  <section>
-    <div>
-      <table class="table">
-        <thead>
+      </div>
+    </form>
+  </div>
+</section>
+<section>
+  <div>
+    <span class="btn-group">
+      <a asp-page="./Edit" class="btn btn-primary">
+        <i class="glyphicon glyphicon-plus"></i>
+        Create
+      </a>
+    </span>
+  </div>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Cuisine</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (Restaurant restaurant in Model.Restaurants)
+        {
           <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Cuisine</th>
+            <td class="col-md-4">@restaurant.Name</td>
+            <td class="col-md-4">@restaurant.Location</td>
+            <td class="col-md-1">@restaurant.Cuisine.ToString()</td>
+            <td class="col-md-3">
+              <div>
+                <span class="btn-group">
+                  <a asp-page="./Detail" asp-route-id="@restaurant.Id" class="btn btn-info">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                    Details
+                  </a>
+                  <a asp-page="./Edit" asp-route-id="@restaurant.Id" class="btn btn-info">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    Edit
+                  </a>
+                  <a asp-page="./Edit" asp-route-id="@restaurant.Id" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    Delete
+                  </a>
+                </span>
+              </div>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          @foreach (Restaurant restaurant in Model.Restaurants)
-          {
-            <tr>
-              <td>@restaurant.Name</td>
-              <td>@restaurant.Location</td>
-              <td>@restaurant.Cuisine.ToString()</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-  </section>
-</body>
-</html>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
